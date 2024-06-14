@@ -2,15 +2,15 @@ import connection from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name_event, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id } = req.body;
+    const { name_event, description, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id } = req.body;
     
     try {
       const query = `
-        INSERT INTO eventos 
-        (name_event, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO evento
+        (name_event, description, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
-      const values = [name_event, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id];
+      const values = [name_event, description, dress_code, occasion, start_time, end_time, start_date, end_date, organizador_id, anfitrion_id];
       const [result] = await connection.query(query, values);
       res.status(201).json({ id: result.insertId, ...req.body });
     } catch (error) {

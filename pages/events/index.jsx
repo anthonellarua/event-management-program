@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -34,6 +35,9 @@ export default function EventsList() {
         {events.map((event) => (
           <li key={event.id}>
             {event.name_event} - {event.occasion} (Desde: {event.start_date} {event.start_time} Hasta: {event.end_date} {event.end_time})
+            <Link href={`/events/${event.id}`}>
+              <button>Ver Evento</button>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,10 +1,12 @@
 // create.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import styles from "./create.module.css";
 
 export default function CreateEvent() {
   const [formData, setFormData] = useState({
     name_event: '',
+    description: '',
     dress_code: '',
     occasion: '',
     start_time: '',
@@ -36,7 +38,7 @@ export default function CreateEvent() {
       });
 
       if (response.ok) {
-        router.push('/events'); // Redirigir a la lista de eventos u otra página
+        router.push('/events');
       } else {
         console.error('Error creating event');
       }
@@ -46,12 +48,16 @@ export default function CreateEvent() {
   };
 
   return (
-    <div>
+    <div className={styles.createeventsection}>
       <h1>Crear Evento</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name_event">Nombre del Evento:</label>
           <input type="text" id="name_event" name="name_event" value={formData.name_event} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="description">Descripción:</label>
+          <input type="text" id="description" name="description" value={formData.description} onChange={handleChange} required />
         </div>
         <div>
           <label htmlFor="dress_code">Código de Vestimenta:</label>

@@ -15,23 +15,25 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-      <h1>Bienvenido a la Aplicación de Gestión de Eventos</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/events">
-              Ver Eventos
-            </Link>
-          </li>
-          <li>
-            <Link href="/events/create">
-              Crear Evento
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+      <main>
+        <div>
+          <h1>Bienvenido a la Aplicación de Gestión de Eventos</h1>
+          <nav>
+            <ul>
+              <li>
+                <Link href="/events">
+                  Ver Eventos
+                </Link>
+              </li>
+              <li>
+                <Link href="/events/create">
+                  Crear Evento
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </main>
     </>
   );
 }
