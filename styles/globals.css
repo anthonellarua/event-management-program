@@ -1,25 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
+:root {
+  --purple-100: #1E4ED7;
+  --purple-100: #6B4EFF;
+  --purple-100: #F8F5FE;
+
+  --gray-100:#6B7D8B;
+
+  --black:#000000;
+  --white:#FFFFFF;
+  --background--purple-light-100: linear-gradient(180deg, #F8F5FE 0%, #FFF 100%);
+}
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Comfortaa", sans-serif;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--background--purple-light-100);
+  min-height: 100vh;
 }
 
 a {
@@ -27,8 +32,14 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+#__next{
+  display: flex;
+}
+
+#__next>div{
+  width: 25%;
+}
+
+main{
+  width: 75%;
 }

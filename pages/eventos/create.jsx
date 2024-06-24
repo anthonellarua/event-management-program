@@ -13,8 +13,6 @@ export default function CreateEvent() {
     end_time: '',
     start_date: '',
     end_date: '',
-    organizador_id: '',
-    anfitrion_id: ''
   });
   const router = useRouter();
 
@@ -29,7 +27,7 @@ export default function CreateEvent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/events/create', {
+      const response = await fetch('/api/eventos/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,14 +80,6 @@ export default function CreateEvent() {
         <div>
           <label htmlFor="end_date">Fecha de Fin:</label>
           <input type="date" id="end_date" name="end_date" value={formData.end_date} onChange={handleChange} required />
-        </div>
-        <div>
-          <label htmlFor="organizador_id">ID del Organizador:</label>
-          <input type="number" id="organizador_id" name="organizador_id" value={formData.organizador_id} onChange={handleChange} required />
-        </div>
-        <div>
-          <label htmlFor="anfitrion_id">ID del Anfitrión:</label>
-          <input type="number" id="anfitrion_id" name="anfitrion_id" value={formData.anfitrion_id} onChange={handleChange} required />
         </div>
         <button type="submit">Crear Evento</button>
       </form>

@@ -9,7 +9,7 @@ export default function EventsList() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/events');
+        const response = await fetch('/api/eventos');
         if (!response.ok) {
           throw new Error('Error fetching events');
         }
@@ -24,7 +24,7 @@ export default function EventsList() {
   }, []);
 
   const handleCreateEvent = () => {
-    router.push('/events/create');
+    router.push('/eventos/create');
   };
 
   return (
@@ -35,7 +35,7 @@ export default function EventsList() {
         {events.map((event) => (
           <li key={event.id}>
             {event.name_event} - {event.occasion} (Desde: {event.start_date} {event.start_time} Hasta: {event.end_date} {event.end_time})
-            <Link href={`/events/${event.id}`}>
+            <Link href={`/eventos/${event.id}`}>
               <button>Ver Evento</button>
             </Link>
           </li>

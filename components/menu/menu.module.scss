@@ -1,0 +1,19 @@
+.menusection{
+    display: flex;
+    justify-content: center;
+
+    &__menucontainer{
+        background-color: var(--white);
+        width: 300px;
+    }
+
+    &__activeLink{
+        color:var(--purple-100);
+    }
+
+    &__menudiv{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
