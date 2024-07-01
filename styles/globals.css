@@ -10,6 +10,8 @@
   --black:#000000;
   --white:#FFFFFF;
   --background--purple-light-100: linear-gradient(180deg, #F8F5FE 0%, #FFF 100%);
+  --boxshadow-100: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
+  --h1: 28px;
 }
 
 * {

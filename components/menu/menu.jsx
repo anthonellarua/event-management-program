@@ -11,10 +11,15 @@ export default function Menu() {
   return (
     <div className={styles.menusection}>
       <div className={styles.menusection__menucontainer}>
-        <span>Nuevo evento</span>
+        <Link href="/eventos/create" passHref>
+          <span className={styles.menusection__nuevoevento}>Nuevo evento</span>
+        </Link>
         <div>
-          <span>Menu</span>
+          <span className={styles.menusection__subtitle}>Menu</span>
           <div className={styles.menusection__menudiv}>
+            <Link href="/" passHref>
+              <span className={isActiveLink('/') ? styles.menusection__activeLink : styles.menusection__link}>Home</span>
+            </Link>
             <Link href="/eventos" passHref>
               <span className={isActiveLink('/eventos') ? styles.menusection__activeLink : styles.menusection__link}>Eventos</span>
             </Link>
@@ -31,6 +36,8 @@ export default function Menu() {
               <span className={isActiveLink('/organizadores') ? styles.menusection__activeLink : styles.menusection__link}>Organizadores</span>
             </Link>
           </div>
+        </div>
+        <div className={styles.menusection__hr}>
         </div>
       </div>
     </div>

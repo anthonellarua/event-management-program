@@ -1,10 +1,22 @@
 .menusection{
     display: flex;
     justify-content: center;
+    margin-top: 60px;
 
     &__menucontainer{
         background-color: var(--white);
-        width: 300px;
+        box-shadow: var(--boxshadow-100);
+        background-color: var(--white);
+        border-radius: 12px;
+        display: flex;
+        padding: 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 35px;
+    }
+
+    &__subtitle{
+        color:var(--gray-100);
     }
 
     &__activeLink{
@@ -14,6 +26,12 @@
     &__menudiv{
         display: flex;
         flex-direction: column;
+    }
+
+    &__hr{
+        width: 100%;
+        height: 0.1px;
+        background: var(--gray-100);
     }
 }
 
