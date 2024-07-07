@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './menu.module.scss';
+import Image from 'next/image';
 
 export default function Menu() {
   const router = useRouter();
@@ -11,30 +12,47 @@ export default function Menu() {
   return (
     <div className={styles.menusection}>
       <div className={styles.menusection__menucontainer}>
-        <Link href="/eventos/create" passHref>
-          <span className={styles.menusection__nuevoevento}>Nuevo evento</span>
+        <Link href="/eventos/create" className={styles.menusection__nuevoevento} passHref>
+          <Image width={20} height={20} src="/icons/add-icon.png"/><span>Nuevo evento</span>
         </Link>
-        <div>
+        <div className={styles.menusection__menu}>
           <span className={styles.menusection__subtitle}>Menu</span>
           <div className={styles.menusection__menudiv}>
-            <Link href="/" passHref>
-              <span className={isActiveLink('/') ? styles.menusection__activeLink : styles.menusection__link}>Home</span>
-            </Link>
-            <Link href="/eventos" passHref>
-              <span className={isActiveLink('/eventos') ? styles.menusection__activeLink : styles.menusection__link}>Eventos</span>
-            </Link>
-            <Link href="/invitados" passHref>
-              <span className={isActiveLink('/invitados') ? styles.menusection__activeLink : styles.menusection__link}>Invitados</span>
-            </Link>
-            <Link href="/anfitriones" passHref>
-              <span className={isActiveLink('/anfitriones') ? styles.menusection__activeLink : styles.menusection__link}>Anfitriones</span>
-            </Link>
-            <Link href="/programas" passHref>
-              <span className={isActiveLink('/programas') ? styles.menusection__activeLink : styles.menusection__link}>Programas</span>
-            </Link>
-            <Link href="/organizadores" passHref>
-              <span className={isActiveLink('/organizadores') ? styles.menusection__activeLink : styles.menusection__link}>Organizadores</span>
-            </Link>
+            
+              <Link href="/" className={isActiveLink('/') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/home-icon-black.png"/>
+                Home
+              </Link>
+            
+              <Link href="/eventos" className={isActiveLink('/eventos') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/calendar-icon-black.png"/>
+                Eventos
+              </Link>
+
+              <Link href="/invitados" className={isActiveLink('/invitados') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/people-icon-black.png"/>
+                Invitados
+              </Link>
+
+              <Link href="/anfitriones" className={isActiveLink('/anfitriones') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/anfitriones-icon-black.png"/>
+                Anfitriones
+              </Link>
+
+              <Link href="/programas" className={isActiveLink('/programas') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/timer-icon-black.png"/>
+                Programas
+              </Link>
+
+              <Link href="/lugares" className={isActiveLink('/lugares') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/pin-icon-black.png"/>
+                Lugares
+              </Link>
+
+              <Link href="/organizadores" className={isActiveLink('/organizadores') ? styles.menusection__activeLink : styles.menusection__link}>
+                <Image width={20} height={20} src="/icons/user-square-icon-black.png"/>
+                Organizadores
+              </Link>
           </div>
         </div>
         <div className={styles.menusection__hr}>

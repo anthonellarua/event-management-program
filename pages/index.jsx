@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import connection from '../lib/db';
 import Image from "next/image";
+import styles from './index.module.scss';
 
 export default function Home({ upcomingEvents, latestUncontactedInvites }) {
 
@@ -13,33 +14,37 @@ export default function Home({ upcomingEvents, latestUncontactedInvites }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <div>
-          <h2>Próximos eventos</h2>
-          <ul>
-            { upcomingEvents.map(event => (
-              <Link href={`/events/${event.id}`}>
-                <h4>{event.name_event}</h4>
-                <span>{event.description}</span>
-                <div>
-                  <div>
-                    <span>{event.description}</span>
-                    <span>{event.start_date}</span>
+        <div className={styles.home}>
+          <div>
+            <h2>Próximos eventos</h2>
+            <ul className={styles.events}>
+              { upcomingEvents.map(event => (
+                <Link href={`/eventos/${event.id}`} className={styles.events__item}>
+                  <h4>{event.name_event}</h4>
+                  <span>{event.description}</span>
+                  <div className={styles.events__details}>
+                    <div className={styles.events__details__container}>
+                      <span> <Image width={20} height={20} src="/icons/pin-icon-gray.png" alt=""/> {event.location}</span>
+                      <span> <Image width={20} height={20} src="/icons/calendar-icon-gray.png" alt=""/> {event.start_date}</span>
+                    </div>
+                    <div className={styles.events__details__chevron}>
+                      <Image width={24} height={24} src="/icons/chevron-right-light.png" alt=""/>
+                    </div>
                   </div>
-                  <div>
-                    <Image width={24} height={24} src="/icons/chevron-right-light.png" alt=""/>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </ul>
-          <h2>Invitados que faltan contactar</h2>
-          <ul>
-            {latestUncontactedInvites.map(invite => (
-              <li key={invite.id}>
-                {invite.name} {invite.last_name}
-              </li>
-            ))}
-          </ul>
+                </Link>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2>Invitados que faltan contactar</h2>
+            <ul>
+              {latestUncontactedInvites.map(invite => (
+                <li key={invite.id}>
+                  {invite.name} {invite.last_name} - {invite.event_name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </main>
     </>
@@ -48,15 +53,19 @@ export default function Home({ upcomingEvents, latestUncontactedInvites }) {
 
 export async function getStaticProps() {
   const upcomingEventsQuery = `
-    SELECT * FROM evento
+    SELECT evento.*, lugares.name AS location
+    FROM evento
+    LEFT JOIN lugares ON lugares.evento_id = evento.id
     ORDER BY start_date ASC
     LIMIT 2;
   `;
 
   const latestUncontactedInvitesQuery = `
-    SELECT * FROM invitados
-    WHERE contactado = 0
-    ORDER BY id DESC
+    SELECT invitados.*, evento.name_event AS event_name
+    FROM invitados
+    JOIN evento ON invitados.evento_id = evento.id
+    WHERE invitados.contactado = 0
+    ORDER BY invitados.id DESC
     LIMIT 4;
   `;
 

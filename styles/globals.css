@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
 :root {
-  --purple-100: #1E4ED7;
-  --purple-100: #6B4EFF;
-  --purple-100: #F8F5FE;
 
-  --gray-100:#6B7D8B;
+  --purple-100: #F8F5FE;
+  --purple-200: #6B4EFF;
+
+  --gray-100:#E7EAEF;
+  --gray-200:#6B7D8B;
 
   --black:#000000;
   --white:#FFFFFF;
@@ -36,12 +37,15 @@ a {
 
 #__next{
   display: flex;
+  padding: 60px 0px;
 }
 
 #__next>div{
-  width: 25%;
+  width: 387px;
 }
 
-main{
-  width: 75%;
+h2{
+  font-size: 28px;
+  color: var(--gray-200);
+  font-weight: 400;
 }
