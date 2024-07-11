@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import styles from './index.module.scss';
+import Image from 'next/image';
 
 export default function EventsList() {
   const [events, setEvents] = useState([]);
@@ -28,19 +30,28 @@ export default function EventsList() {
   };
 
   return (
-    <div>
-      <h1>Lista de Eventos</h1>
-      <button onClick={handleCreateEvent}>Crear Evento</button>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            {event.name_event} - {event.occasion} (Desde: {event.start_date} {event.start_time} Hasta: {event.end_date} {event.end_time})
-            <Link href={`/eventos/${event.id}`}>
-              <button>Ver Evento</button>
+    <div className={styles.eventos}>
+      <div className={styles.eventos__tittle}>
+        <h1>Eventos</h1>
+        <span onClick={handleCreateEvent}><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo evento</span>
+      </div>
+      {events.map((event) => (
+        <div className={styles.evento_item}>
+          <h3>{event.name_event}</h3>
+          <span>{event.description}</span>
+          <div className={styles.evento_item__details}>
+            <div>
+              <span><Image width={24} height={24} src="/icons/user-icon-gray.png" alt=""/>{event.start_date}</span>
+              <span><Image width={24} height={24} src="/icons/pin-icon-gray.png" alt=""/> {event.location}</span>
+              <span><Image width={24} height={24} src="/icons/calendar-icon-gray.png" alt=""/>{event.host_name}</span>
+            </div>
+            <Link className={styles.evento_item__button} href={`/eventos/${event.id}`}>
+              Ver Evento
+              <Image width={24} height={24} src="/icons/chevron-right-light.png" alt=""/>
             </Link>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function Home({ upcomingEvents, latestUncontactedInvites }) {
       <main>
         <div className={styles.home}>
           <div>
-            <h2>Próximos eventos</h2>
+            <h1>Próximos eventos</h1>
             <ul className={styles.events}>
               { upcomingEvents.map(event => (
                 <Link href={`/eventos/${event.id}`} className={styles.events__item}>
@@ -36,11 +36,24 @@ export default function Home({ upcomingEvents, latestUncontactedInvites }) {
             </ul>
           </div>
           <div>
-            <h2>Invitados que faltan contactar</h2>
-            <ul>
+            <h1>Invitados que faltan contactar</h1>
+            <ul className={styles.invitados}>
               {latestUncontactedInvites.map(invite => (
                 <li key={invite.id}>
-                  {invite.name} {invite.last_name} - {invite.event_name}
+                  <Image width={52} height={52} src="/avatar-invited.png" alt=""/>
+                  <div>
+                    <span>{invite.name}</span>
+                  </div>
+                  <div>
+                    <span> {invite.last_name}</span>
+                  </div>
+                  <div>
+                    <span>{invite.event_name}</span>
+                  </div>
+                  <Link href={`/eventos/${invite.evento_id}`} className={styles.invitados__button}>
+                    Ver evento
+                    <Image width={24} height={24} src="/icons/chevron-right-light.png" alt=""/>
+                  </Link>
                 </li>
               ))}
             </ul>

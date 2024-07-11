@@ -12,22 +12,46 @@ export default async function handler(req, res) {
       }
 
       // Obtener los invitados
-      const [invitedResult] = await connection.query('SELECT * FROM invitados WHERE evento_id = ?', [id]);
+      const [invitedResult] = await connection.query('SELECT invitados.*, evento.name_event FROM invitados LEFT JOIN evento ON invitados.evento_id = evento.id WHERE invitados.evento_id = ?', [id]);
 
       // Obtener el programa del evento
       const [programResult] = await connection.query('SELECT * FROM programa WHERE event_id = ?', [id]);
 
       // Obtener el nombre del organizador
       const [organizadorResult] = await connection.query('SELECT * FROM organizadores WHERE event_id = ?', [id]);
+
       // Obtener el nombre del anfitrión
       const [anfitrionResult] = await connection.query('SELECT * FROM anfitriones WHERE event_id = ?', [id]);
 
+      // Función para formatear la fecha en formato dd/mm/yyyy
+      const formatDate = (date) => {
+        if (!date) return null;
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Date(date).toLocaleDateString('es-ES', options);
+      };
+
+      // Función para formatear la fecha en formato "14 de junio"
+      const formatProgramDate = (date) => {
+        if (!date) return null;
+        const options = { day: 'numeric', month: 'long' };
+        return new Date(date).toLocaleDateString('es-ES', options);
+      };
+
+      const event = eventResult[0];
+      event.start_date = formatDate(event.start_date);
+      event.end_date = formatDate(event.end_date);
+
+      const program = programResult.map(item => ({
+        ...item,
+        date: formatProgramDate(item.date),
+      }));
+
       res.status(200).json({
-        event: eventResult[0],
+        event,
         invited: invitedResult,
-        program: programResult,
-        organizadores:organizadorResult,
-        anfitriones:anfitrionResult,
+        program,
+        organizadores: organizadorResult,
+        anfitriones: anfitrionResult,
       });
     } catch (error) {
       console.error('Error fetching event data:', error);

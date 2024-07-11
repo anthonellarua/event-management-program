@@ -1,0 +1,222 @@
+.event{
+    display: flex;
+    flex-direction: column;
+    max-width: 1043px;
+    width: 100%;
+    gap: 50px;
+
+    h1{
+        color: var(--purple-200) !important;
+    }
+}
+
+.people{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    >div{
+        display: flex;
+        padding: 10px 20px;
+        align-items: center;
+        gap: 20px;
+        background-color: var(--gray-100);
+        border-radius: 12px;
+        
+        >div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 5px;
+
+            span:nth-child(1){
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+.datos{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__content{
+        display: flex;
+        padding: 30px;
+        flex-direction: column;
+        gap: 30px;
+        background-color: var(--white);
+        border-radius: 12px;
+        box-shadow: var(--boxshadow-100);
+    }
+
+    &__data{
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+        background-color: var(--purple-100);
+        border-radius: 12px;
+
+        >div:nth-child(1){
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        &__item{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        span:nth-child(1){
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px 12px 0px 0px;
+            border-bottom: 0.5px solid var(--gray-200);
+            background-color: var(--white);
+            color: var(--gray-200);
+        }
+
+        span:nth-child(2){
+            display: flex;
+            padding: 10px 20px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0px 0px 12px 12px;
+            background-color: var(--white);
+        }
+    }
+}
+
+.programa{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__content{
+        display: flex;
+        padding: 30px;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 12px;
+        background-color: var(--white);
+        box-shadow: var(--boxshadow-100);
+    }
+
+    &__item{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+
+        >div{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        &__date{
+            display: flex;
+            padding: 10px 20px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background: var(--gray-100);
+        }
+    }
+}
+
+.invitados{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__item{
+        display: flex;
+        padding: 10px 20px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 12px;
+        background-color: var(--white);
+        box-shadow: var(--boxshadow-100);
+    }
+
+    &__buttoncontactar{
+        border: 1px solid var(--purple-200);
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+        width: 100%;
+        color: var(--purple-200);
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &__buttoncontactado{
+        background-color: var(--gray-100);
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+        width: 100%;
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    &__actions{
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.buttonadd{
+    background-color: var(--purple-200);
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    color: var(--white);
+    font-weight: 700;
+    cursor: pointer;
+}
