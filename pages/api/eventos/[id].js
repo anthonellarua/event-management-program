@@ -23,6 +23,9 @@ export default async function handler(req, res) {
       // Obtener el nombre del anfitrión
       const [anfitrionResult] = await connection.query('SELECT * FROM anfitriones WHERE event_id = ?', [id]);
 
+      // Obtener el nombre del lugar
+      const [placeResult] = await connection.query('SELECT * FROM lugares WHERE evento_id = ?', [id]);
+
       // Función para formatear la fecha en formato dd/mm/yyyy
       const formatDate = (date) => {
         if (!date) return null;
@@ -52,6 +55,7 @@ export default async function handler(req, res) {
         program,
         organizadores: organizadorResult,
         anfitriones: anfitrionResult,
+        lugares: placeResult,
       });
     } catch (error) {
       console.error('Error fetching event data:', error);

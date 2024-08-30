@@ -1,5 +1,3 @@
-// components/EditEventForm.module.scss
-
 .modal {
     position: fixed;
     z-index: 1;
@@ -16,23 +14,28 @@
 }
   
 .modalContent {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: var(--white);
+    padding: 40px;
     width: 80%;
-    max-width: 500px;
+    max-width: 700px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
 }
-  
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+
+.modaltittle{
+    display: flex;
+    justify-content: space-between;
+
+    &__close {
+        color: var(--gray-200);
+        font-size: 28px;
+        cursor: pointer;
+    }
 }
-  
+
 .close:hover,
 .close:focus {
     color: black;
@@ -43,21 +46,72 @@
 .form {
     display: flex;
     flex-direction: column;
-    
+    gap: 10px;
+
+    &__doubleinput{
+        display: flex;
+        gap: 10px;
+
+        label{
+            width: 100%;
+        }
+    }
+
     &__input{
+        display: flex;
+        flex-direction: column;
+        gap:4px;
+
+        span{
+            font-size: 14px;
+            color: var(--gray-200);
+        }
+
         input, textarea{
             width: 100%;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-100);
+            font-size: 16px;
+        }
+
+        input:hover, input:focus, textarea:hover, textarea:focus{
+            border: 1px solid var(--purple-200);
+            outline: none;
         }
     }
 }
   
 .form {
-    &__button{
-        background-color: #4CAF50;
+    &__actions{
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    &__buttoncancel{
+        background: var(--gray-200);
+        width: 100%;
+        border-radius: 12px;
         color: white;
+        display: flex;
         padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
         border: none;
-        border-radius: 4px;
         cursor: pointer;
+        font-size: 16px;
+    }
+    &__buttonsubmit{
+        background: var(--purple-200);
+        width: 100%;
+        border-radius: 12px;
+        color: white;
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
     }
 }

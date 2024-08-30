@@ -20,14 +20,21 @@
     background-color: var(--white);
     padding: 40px;
     width: 80%;
-    max-width: 700px;
+    max-width: 400px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+    justify-content: center;
+    align-items: center;
 }
 
 .modaltittle{
     display: flex;
     justify-content: space-between;
+    width: 100%;
+
+    h1{
+        color: red !important;
+    }
 
     &__close {
         color: var(--gray-200);
@@ -44,49 +51,10 @@
 }
   
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    &__doubleinput{
-        display: flex;
-        gap: 10px;
-
-        label{
-            width: 100%;
-        }
-    }
-
-    &__input{
-        display: flex;
-        flex-direction: column;
-        gap:4px;
-
-        span{
-            font-size: 14px;
-            color: var(--gray-200);
-        }
-
-        input, textarea, select{
-            width: 100%;
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--gray-100);
-            font-size: 16px;
-        }
-
-        input:hover, input:focus, textarea:hover, textarea:focus{
-            border: 1px solid var(--purple-200);
-            outline: none;
-        }
-    }
-}
-  
-.form {
     &__actions{
         display: flex;
         gap: 10px;
-        margin-top: 20px;
+        width: 100%;
     }
     &__buttoncancel{
         background: var(--gray-200);
@@ -102,7 +70,7 @@
         font-size: 16px;
     }
     &__buttonsubmit{
-        background: var(--purple-200);
+        background: red;
         width: 100%;
         border-radius: 12px;
         color: white;

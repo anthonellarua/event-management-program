@@ -1,20 +1,12 @@
 import { useState } from 'react';
-import styles from './AddActivityForm.module.scss';
+import styles from './EditActivityForm.module.scss';
 
-export default function AddActivityForm({ onClose, onSave }) {
-  const [formData, setFormData] = useState({
-    date: '',
-    start_time: '',
-    end_time: '',
-    description: ''
-  });
+const EditActivityForm = ({ activity, onClose, onSave }) => {
+  const [formData, setFormData] = useState({ ...activity });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -26,12 +18,21 @@ export default function AddActivityForm({ onClose, onSave }) {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <div className={styles.modaltittle}>
-          <h1>Agregar actividad</h1>
+          <h1>Editar actividad</h1>
           <span className={styles.modaltittle__close} onClick={onClose}>&times;</span>
         </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.form__input}>
-            <span>Fecha</span>
+            Descripción:
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </label>
+          <label className={styles.form__input}>
+            Fecha:
             <input
               type="date"
               name="date"
@@ -41,7 +42,7 @@ export default function AddActivityForm({ onClose, onSave }) {
           </label>
           <div className={styles.form__doubleinput}>
             <label className={styles.form__input}>
-              <span>Hora de inicio</span>
+              Hora de inicio:
               <input
                 type="time"
                 name="start_time"
@@ -50,7 +51,7 @@ export default function AddActivityForm({ onClose, onSave }) {
               />
             </label>
             <label className={styles.form__input}>
-              <span>Hora de finalización</span>
+              Hora de fin:
               <input
                 type="time"
                 name="end_time"
@@ -60,14 +61,6 @@ export default function AddActivityForm({ onClose, onSave }) {
             </label>
           </div>
           
-          <label className={styles.form__input}>
-            <span>Descripción</span>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-            />
-          </label>
           <div className={styles.form__actions}>
             <button className={styles.form__buttoncancel} onClick={onClose}>Cancelar</button>
             <button className={styles.form__buttonsubmit} type="submit">Guardar</button>
@@ -76,4 +69,6 @@ export default function AddActivityForm({ onClose, onSave }) {
       </div>
     </div>
   );
-}
+};
+
+export default EditActivityForm;

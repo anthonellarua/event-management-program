@@ -7,10 +7,10 @@ export default function EditEventForm({ event, onClose, onSave }) {
     description: event.description,
     dress_code: event.dress_code,
     occasion: event.occasion,
-    start_date: event.start_date,  // Asumiendo que start_date ya está en el formato YYYY-MM-DD
-    end_date: event.end_date,  // Asumiendo que end_date ya está en el formato YYYY-MM-DD
-    start_time: event.start_time,  // Asumiendo que start_time ya está en el formato HH:MM
-    end_time: event.end_time  // Asumiendo que end_time ya está en el formato HH:MM
+    start_date: event.start_date,
+    end_date: event.end_date,
+    start_time: event.start_time,
+    end_time: event.end_time 
   });
 
   const handleChange = (e) => {
@@ -29,11 +29,13 @@ export default function EditEventForm({ event, onClose, onSave }) {
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        <span className={styles.close} onClick={onClose}>&times;</span>
-        <h2>Editar datos del evento</h2>
+        <div className={styles.modaltittle}>
+          <h1>Editar datos</h1>
+          <span className={styles.modaltittle__close} onClick={onClose}>&times;</span>
+        </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.form__input}>
-            Nombre del Evento:
+            <span>Nombre del Evento</span>
             <input
               type="text"
               name="name_event"
@@ -42,7 +44,7 @@ export default function EditEventForm({ event, onClose, onSave }) {
             />
           </label>
           <label className={styles.form__input}>
-            Descripción:
+            <span>Descripción</span>
             <textarea
               name="description"
               value={formData.description}
@@ -50,7 +52,7 @@ export default function EditEventForm({ event, onClose, onSave }) {
             />
           </label>
           <label className={styles.form__input}>
-            Dress Code:
+            <span>Dress Code</span>
             <input
               type="text"
               name="dress_code"
@@ -59,7 +61,7 @@ export default function EditEventForm({ event, onClose, onSave }) {
             />
           </label>
           <label className={styles.form__input}>
-            Ocasión:
+            <span>Ocasión</span>
             <input
               type="text"
               name="occasion"
@@ -67,43 +69,51 @@ export default function EditEventForm({ event, onClose, onSave }) {
               onChange={handleChange}
             />
           </label>
-          <label className={styles.form__input}>
-            Fecha de inicio:
-            <input
-              type="date"
-              name="start_date"
-              value={formData.start_date}
-              onChange={handleChange}
-            />
-          </label>
-          <label className={styles.form__input}>
-            Fecha de finalización:
-            <input
-              type="date"
-              name="end_date"
-              value={formData.end_date}
-              onChange={handleChange}
-            />
-          </label>
-          <label className={styles.form__input}>
-            Hora de inicio:
-            <input
-              type="time"
-              name="start_time"
-              value={formData.start_time}
-              onChange={handleChange}
-            />
-          </label>
-          <label className={styles.form__input}>
-            Hora de finalización:
-            <input
-              type="time"
-              name="end_time"
-              value={formData.end_time}
-              onChange={handleChange}
-            />
-          </label>
-          <button className={styles.form__button} type="submit">Guardar cambios</button>
+          <div className={styles.form__doubleinput}>
+            <label className={styles.form__input}>
+              <span>Fecha de inicio</span>
+              <input
+                type="date"
+                name="start_date"
+                value={formData.start_date}
+                onChange={handleChange}
+              />
+            </label>
+            <label className={styles.form__input}>
+              <span>Fecha de finalización</span>
+              <input
+                type="date"
+                name="end_date"
+                value={formData.end_date}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <div className={styles.form__doubleinput}>
+            <label className={styles.form__input}>
+              <span>Hora de inicio</span>
+              <input
+                type="time"
+                name="start_time"
+                value={formData.start_time}
+                onChange={handleChange}
+              />
+            </label>
+            <label className={styles.form__input}>
+              <span>Hora de finalización</span>
+              <input
+                type="time"
+                name="end_time"
+                value={formData.end_time}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className={styles.form__actions}>
+            <button className={styles.form__buttoncancel} onClick={onClose}>Cancelar</button>
+            <button className={styles.form__buttonsubmit} type="submit">Guardar</button>
+          </div>
         </form>
       </div>
     </div>
