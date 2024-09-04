@@ -5,6 +5,9 @@ import Image from "next/image";
 import AddActivityForm from "@/components/programa/AddActivityForm";
 import EditActivityForm from "@/components/programa/EditActivityForm";
 import ConfirmDeleteModal from "@/components/confirm/ConfirmDeleteModal";
+import moment from "moment";
+require("moment/min/locales.min");
+moment.locale('es');
 
 const ProgramasPage = () => {
     const router = useRouter();
@@ -68,7 +71,7 @@ const ProgramasPage = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...newActivity, event_id: id }),
+                body: JSON.stringify({ ...newActivity }),
             });
 
             if (!response.ok) {
@@ -78,10 +81,14 @@ const ProgramasPage = () => {
             const updatedData = await response.json();
             console.log("Activity added successfully:", updatedData);
 
-            setEventDetails((prevDetails) => ({
-                ...prevDetails,
-                program: [...prevDetails.program, updatedData.activity],
-            }));
+            const { name_event } = newActivity;
+
+            setProgramas((prevPrograms) => [
+                ...prevPrograms,
+                { ...updatedData.program, name_event },
+            ]);
+
+
             setIsAddActivityModalOpen(false);
         } catch (error) {
             console.error("Error adding activity:", error);
@@ -178,7 +185,7 @@ const ProgramasPage = () => {
                     <tbody>
                         {programas.map((programa) => (
                             <tr key={programa.id}>
-                                <td>{programa.date}</td>
+                                <td>{moment(programa.date).format("YYYY-MM-DD")}</td>
                                 <td>
                                     {programa.start_time} - {programa.end_time}
                                 </td>

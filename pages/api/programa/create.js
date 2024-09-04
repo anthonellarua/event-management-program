@@ -2,15 +2,16 @@ import connection from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { date, start_time, end_time, description, event_id } = req.body;
+    const { date, start_time, end_time, description, evento_id } = req.body;
 
+    console.log(req.body);
     try {
       const query = `
         INSERT INTO programa
         (date, start_time, end_time, description, event_id)
         VALUES (?, ?, ?, ?, ?)
       `;
-      const values = [date, start_time, end_time, description, event_id];
+      const values = [date, start_time, end_time, description, evento_id];
       const [result] = await connection.query(query, values);
       
       const newActivity = {
@@ -19,10 +20,10 @@ export default async function handler(req, res) {
         start_time,
         end_time,
         description,
-        event_id
+        evento_id
       };
 
-      res.status(201).json({ activity: newActivity });
+      res.status(201).json({ program: newActivity });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

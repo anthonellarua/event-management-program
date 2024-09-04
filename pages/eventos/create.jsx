@@ -36,7 +36,7 @@ export default function CreateEvent() {
       });
 
       if (response.ok) {
-        router.push('/events');
+        router.push('/eventos');
       } else {
         console.error('Error creating event');
       }

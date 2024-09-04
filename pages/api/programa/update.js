@@ -1,8 +1,12 @@
 import connection from '../../../lib/db';
+import moment from "moment";
+require("moment/min/locales.min");
+moment.locale("es");
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
-    const { id, date, start_time, end_time, description } = req.body;
+    let { id, date, start_time, end_time, description } = req.body;
+    date = moment(date).format("YYYY-MM-DD")
 
     try {
       const query = `

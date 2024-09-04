@@ -1,23 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "./AddActivityForm.module.scss";
 
-export default function AddActivityForm({ onClose, onSave }) {
+export default function AddActivityInEventsForm({ id, onClose, onSave }) {
     const [formData, setFormData] = useState({
         date: "",
         start_time: "",
         end_time: "",
         description: "",
     });
-    const [event, setEvent] = useState("");
-    const [eventos, setEventos] = useState([]);
-
-    useEffect(() => {
-        fetch("/api/eventos/lista")
-            .then((resp) => resp.json())
-            .then((resp) => {
-                return setEventos(resp);
-            });
-    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,8 +21,7 @@ export default function AddActivityForm({ onClose, onSave }) {
         e.preventDefault();
         onSave({
             ...formData,
-            evento_id: event,
-            name_event: eventos.find((evento) => evento.value == event).label,
+            evento_id: id,
         });
     };
 
@@ -49,24 +38,6 @@ export default function AddActivityForm({ onClose, onSave }) {
                     </span>
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <div className={styles.form__doubleinput}>
-                        <label className={styles.form__input}>
-                            <span>Eventos</span>
-                            <select
-                                value={event}
-                                onChange={(e) => setEvent(e.target.value)}
-                            >
-                                <option value="" disabled>
-                                    Seleccionar una opción
-                                </option>
-                                {eventos.map((evento, index) => (
-                                    <option key={index} value={evento.value}>
-                                        {evento.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
                     <label className={styles.form__input}>
                         <span>Fecha</span>
                         <input

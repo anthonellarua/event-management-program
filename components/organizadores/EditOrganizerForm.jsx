@@ -18,7 +18,7 @@ export default function EditOrganizerForm({ organizer, onClose, onSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...formData, id: organizer.id });
+    onSave({ ...organizer, ...formData, id: organizer.id });
   };
 
   return (

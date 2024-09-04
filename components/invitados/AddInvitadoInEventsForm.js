@@ -1,22 +1,12 @@
 import { useState, useEffect } from "react";
 import styles from "./AddInvitadoForm.module.scss";
 
-const AddInvitadoForm = ({ onClose, onSave }) => {
+const AddInvitadoInEventsForm = ({ id, onClose, onSave }) => {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
-    const [event, setEvent] = useState("");
     const [contactado, setContactado] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [eventos, setEventos] = useState([]);
-
-    useEffect(() => {
-        fetch("/api/eventos/lista")
-            .then((resp) => resp.json())
-            .then((resp) => {
-                return setEventos(resp);
-            });
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,8 +18,7 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
             name: name,
             last_name: lastName,
             phone: phone,
-            evento_id: event,
-            name_event: eventos.find((evento) => evento.value == event).label,
+            evento_id: id,
             contactado: parseInt(contactado, 10),
         };
 
@@ -49,24 +38,6 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
                     </span>
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <div className={styles.form__doubleinput}>
-                        <label className={styles.form__input}>
-                            <span>Eventos</span>
-                            <select
-                                value={event}
-                                onChange={(e) => setEvent(e.target.value)}
-                            >
-                                <option value="" selected disabled>
-                                    Seleccionar una opción
-                                </option>
-                                {eventos.map((evento, index) => (
-                                    <option key={index} value={evento.value}>
-                                        {evento.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
                     <div className={styles.form__doubleinput}>
                         <label className={styles.form__input}>
                             <span>Nombre</span>
@@ -134,4 +105,4 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
     );
 };
 
-export default AddInvitadoForm;
+export default AddInvitadoInEventsForm;

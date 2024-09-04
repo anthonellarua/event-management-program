@@ -67,10 +67,10 @@ const AnfitrionesPage = () => {
       const updatedData = await response.json();
       console.log('Anfitrion added successfully:', updatedData);
   
-      console.log(newAnfitrion);
-      
+      const {name_event} = newAnfitrion
+
       setAnfitriones(prevAnfitriones => (
-        [...prevAnfitriones, updatedData.anfitriones]
+        [...prevAnfitriones, {...updatedData.anfitriones, name_event}]
       ));
       setIsAddAnfitrionModalOpen(false);
     } catch (error) {

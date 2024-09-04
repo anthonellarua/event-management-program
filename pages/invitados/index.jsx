@@ -52,9 +52,10 @@ export default function Invitados() {
       const updatedData = await response.json();
       console.log('Invitado added successfully:', updatedData);
   
-      console.log(newInvitado);
+      const {name_event} = newInvitado
+
       setInvitados(prevInvitados => (
-        [...prevInvitados, updatedData.invitado]
+        [...prevInvitados, {...updatedData.invitado, name_event}]
       ));
       setIsAddInvitadoModalOpen(false);
     } catch (error) {
