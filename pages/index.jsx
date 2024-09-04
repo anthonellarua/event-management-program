@@ -18,8 +18,8 @@ export default function Home({ upcomingEvents, latestUncontactedInvites }) {
           <div>
             <h1>Próximos eventos</h1>
             <ul className={styles.events}>
-              { upcomingEvents.map(event => (
-                <Link href={`/eventos/${event.id}`} className={styles.events__item}>
+              { upcomingEvents.map((event, index) => (
+                <Link key={index} href={`/eventos/${event.id}`} className={styles.events__item}>
                   <h4>{event.name_event}</h4>
                   <span>{event.description}</span>
                   <div className={styles.events__details}>

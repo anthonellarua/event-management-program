@@ -11,7 +11,7 @@ const ConfirmDeleteModal = ({ onClose, onConfirm, item }) => {
         <p>¿Estás seguro que deseas eliminar este item?</p>
         <div className={styles.form__actions}>
           <button className={styles.form__buttoncancel} onClick={onClose}>Cancelar</button>
-          <button className={styles.form__buttonsubmit} type="submit">Eliminar</button>
+          <button className={styles.form__buttonsubmit} type="submit" onClick={onConfirm}>Eliminar</button>
         </div>
       </div>
     </div>

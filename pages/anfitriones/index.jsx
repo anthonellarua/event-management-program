@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './index.module.scss';
 import Image from 'next/image';
+import AddAnfitrionForm from '@/components/anfitriones/AddAnfitrionForm';
 import EditAnfitrionForm from '@/components/anfitriones/EditAnfitrionForm';
 import ConfirmDeleteModal from '@/components/confirm/ConfirmDeleteModal';
 
 const AnfitrionesPage = () => {
   const router = useRouter();
   const [anfitriones, setAnfitriones] = useState([]);
+  const [isAddAnfitrionModalOpen, setIsAddAnfitrionModalOpen] = useState(false);
   const [isEditAnfitrionModalOpen, setIsEditAnfitrionModalOpen] = useState(false);
   const [selectedAnfitrion, setSelectedAnfitrion] = useState(null);
   const [isDeleteAnfitrionModalOpen, setIsDeleteAnfitrionModalOpen] = useState(false);
@@ -15,6 +17,10 @@ const AnfitrionesPage = () => {
   useEffect(() => {
     fetchData(); // Función para obtener datos
   }, []);
+
+  const handleCreateAnfitrion = () => {
+    setIsAddAnfitrionModalOpen(true);
+  };
 
   const handleEditAnfitrionClick = (anfitrion) => {
     setSelectedAnfitrion(anfitrion);
@@ -41,6 +47,34 @@ const AnfitrionesPage = () => {
       setAnfitriones(data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleSaveAnfitrion = async (newAnfitrion) => {
+    try {
+      const response = await fetch(`/api/anfitriones/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...newAnfitrion })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error adding anfitrion');
+      }
+  
+      const updatedData = await response.json();
+      console.log('Anfitrion added successfully:', updatedData);
+  
+      console.log(newAnfitrion);
+      
+      setAnfitriones(prevAnfitriones => (
+        [...prevAnfitriones, updatedData.anfitriones]
+      ));
+      setIsAddAnfitrionModalOpen(false);
+    } catch (error) {
+      console.error('Error adding anfitrion:', error);
     }
   };
 
@@ -104,7 +138,7 @@ const AnfitrionesPage = () => {
     <div className={styles.anfitriones}>
       <div className={styles.anfitriones__tittle}>
         <h1>Anfitriones</h1>
-        <span><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo anfitrion</span>
+        <span onClick={handleCreateAnfitrion}><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo anfitrion</span>
       </div>
       {anfitriones.length > 0 ? (
         <table>
@@ -119,7 +153,7 @@ const AnfitrionesPage = () => {
               <tr key={anfitrion.id}>
                 <td>{anfitrion.name} {anfitrion.last_name}</td>
                 <td>{anfitrion.phone}</td>
-                <td>{anfitrion.event_id}</td>
+                <td>{anfitrion.name_event}</td>
                 <td><Image width={24} height={24} src="/icons/edit-icon-black.png" alt="" onClick={() => handleEditAnfitrionClick(anfitrion)}/>
                 <Image width={24} height={24} src="/icons/delete-icon-black.png" alt="" onClick={() => handleDeleteAnfitrionClick(anfitrion)}/></td>
               </tr>
@@ -128,6 +162,14 @@ const AnfitrionesPage = () => {
         </table>
       ) : (
         <p>No hay invitados en este momento.</p>
+      )}
+
+      {isAddAnfitrionModalOpen && (
+        <AddAnfitrionForm
+          anfitrion={selectedAnfitrion}
+          onClose={() => setIsAddAnfitrionModalOpen(false)}
+          onSave={handleSaveAnfitrion}
+        />
       )}
 
       {isEditAnfitrionModalOpen && (

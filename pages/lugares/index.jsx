@@ -104,7 +104,7 @@ const LugaresPage = () => {
     <div className={styles.lugares}>
       <div className={styles.lugares__tittle}>
         <h1>Lugares</h1>
-        <span><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo lugar</span>
+        <span><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo lugar</span>
       </div>
       {lugares.length > 0 ? (
         <table>
@@ -121,7 +121,7 @@ const LugaresPage = () => {
                 <td>{lugar.name}</td>
                 <td>{lugar.address}</td>
                 <td>{lugar.reference}</td>
-                <td>{lugar.evento_id}</td>
+                <td>{lugar.name_event}</td>
                 <td><Image width={24} height={24} src="/icons/edit-icon-black.png" alt="" onClick={() => handleEditLugarClick(lugar)}/>
                 <Image width={24} height={24} src="/icons/delete-icon-black.png" alt="" onClick={() => handleDeleteLugarClick(lugar)}/></td>
               </tr>

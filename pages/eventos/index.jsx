@@ -33,10 +33,10 @@ export default function EventsList() {
     <div className={styles.eventos}>
       <div className={styles.eventos__tittle}>
         <h1>Eventos</h1>
-        <span onClick={handleCreateEvent}><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo evento</span>
+        <span onClick={handleCreateEvent}><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo evento</span>
       </div>
-      {events.map((event) => (
-        <div className={styles.evento_item}>
+      {events.map((event, index) => (
+        <div key={index} className={styles.evento_item}>
           <h3>{event.name_event}</h3>
           <span>{event.description}</span>
           <div className={styles.evento_item__details}>

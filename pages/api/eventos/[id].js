@@ -46,7 +46,8 @@ export default async function handler(req, res) {
 
       const program = programResult.map(item => ({
         ...item,
-        date: formatProgramDate(item.date),
+        dateModified: formatProgramDate(item.date),
+        date: item.date
       }));
 
       res.status(200).json({

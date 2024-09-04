@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import styles from './EditActivityForm.module.scss';
+import moment from "moment";
+require("moment/min/locales.min");
+moment.locale('es');
 
 const EditActivityForm = ({ activity, onClose, onSave }) => {
   const [formData, setFormData] = useState({ ...activity });
@@ -36,7 +39,7 @@ const EditActivityForm = ({ activity, onClose, onSave }) => {
             <input
               type="date"
               name="date"
-              value={formData.date}
+              value={moment(formData.date).format("YYYY-MM-DD")}
               onChange={handleChange}
             />
           </label>

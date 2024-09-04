@@ -34,12 +34,15 @@
         box-shadow: var(--boxshadow-100);
 
         thead{
-            border-radius: 8px;
-            background: var(--purple-100);
-            display: flex;
-            padding: 20px;
-            justify-content: space-between;
-            align-items: center;
+            tr {
+                border-radius: 8px;
+                background: var(--purple-100);
+                display: flex;
+                padding: 20px;
+                justify-content: space-between;
+                align-items: center;
+
+            }
         }
 
         th:not(:last-child){

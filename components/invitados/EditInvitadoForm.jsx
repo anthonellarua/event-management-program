@@ -7,7 +7,10 @@ export default function EditInvitadoForm({ invitado, onClose, onSave }) {
   const [phone, setPhone] = useState(invitado.phone);
   const [contactado, setContactado] = useState(invitado.contactado.toString());
 
-  const handleSave = () => {
+    console.log(invitado);
+
+  const handleSave = (e) => {
+    e.preventDefault();
     onSave({ ...invitado, name, last_name: lastName, phone, contactado: parseInt(contactado, 10) });
   };
 

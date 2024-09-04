@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-import styles from "./AddInvitadoForm.module.scss";
+import styles from "./EditAnfitrionForm.module.scss";
 
-const AddInvitadoForm = ({ onClose, onSave }) => {
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
+const AddAnfitrionForm = ({ anfitrion, onClose, onSave }) => {
+    const [formData, setFormData] = useState({ ...anfitrion });
     const [event, setEvent] = useState("");
-    const [contactado, setContactado] = useState(0);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [eventos, setEventos] = useState([]);
 
     useEffect(() => {
@@ -19,29 +15,25 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
             });
     }, []);
 
-    const handleSubmit = async (e) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (isSubmitting) return; // Evitar envíos múltiples
-
-        setIsSubmitting(true);
-        const newInvitado = {
-            name: name,
-            last_name: lastName,
-            phone: phone,
+        onSave({
+            ...formData,
             evento_id: event,
             name_event: eventos.find((evento) => evento.value == event).label,
-            contactado: parseInt(contactado, 10),
-        };
-
-        onSave(newInvitado);
+        });
     };
 
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>
                 <div className={styles.modaltittle}>
-                    <h1>Agregar invitado</h1>
+                    <h1>Agregar anfitrión</h1>
                     <span
                         className={styles.modaltittle__close}
                         onClick={onClose}
@@ -72,59 +64,38 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
                         <label className={styles.form__input}>
                             <span>Nombre</span>
                             <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                             />
                         </label>
                         <label className={styles.form__input}>
                             <span>Apellido</span>
                             <input
-                                type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                required
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleChange}
                             />
                         </label>
                     </div>
-
-                    <div className={styles.form__doubleinput}>
-                        <label className={styles.form__input}>
-                            <span>Teléfono</span>
-                            <input
-                                type="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                required
-                            />
-                        </label>
-                        <label className={styles.form__input}>
-                            <span>Contactado</span>
-                            <select
-                                value={contactado}
-                                onChange={(e) =>
-                                    setContactado(parseInt(e.target.value, 10))
-                                }
-                            >
-                                <option value={0}>No</option>
-                                <option value={1}>Sí</option>
-                            </select>
-                        </label>
-                    </div>
-
+                    <label className={styles.form__input}>
+                        <span>Teléfono</span>
+                        <input
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                        />
+                    </label>
                     <div className={styles.form__actions}>
                         <button
                             className={styles.form__buttoncancel}
                             onClick={onClose}
-                            disabled={isSubmitting} // Deshabilitar si ya se está enviando
                         >
                             Cancelar
                         </button>
                         <button
                             className={styles.form__buttonsubmit}
                             type="submit"
-                            disabled={isSubmitting} // Deshabilitar si ya se está enviando
                         >
                             Guardar
                         </button>
@@ -135,4 +106,4 @@ const AddInvitadoForm = ({ onClose, onSave }) => {
     );
 };
 
-export default AddInvitadoForm;
+export default AddAnfitrionForm;

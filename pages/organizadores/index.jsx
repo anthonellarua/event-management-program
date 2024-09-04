@@ -104,7 +104,7 @@ const OrganizadoresPage = () => {
     <div className={styles.organizadores}>
       <div className={styles.organizadores__tittle}>
         <h1>Organizadores</h1>
-        <span><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo organizador</span>
+        <span><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo organizador</span>
       </div>
       {organizadores.length > 0 ? (
         <table>
@@ -119,7 +119,7 @@ const OrganizadoresPage = () => {
             <tr key={organizador.id}>
               <td>{organizador.name} {organizador.last_name}</td>
               <td>{organizador.phone}</td>
-              <td>{organizador.event_id}</td>
+              <td>{organizador.name_event}</td>
               <td><Image width={24} height={24} src="/icons/edit-icon-black.png" alt="" onClick={() => handleEditOrganizerClick(organizador)}/>
               <Image width={24} height={24} src="/icons/delete-icon-black.png" alt="" onClick={() => handleDeleteOrganizerClick(organizador)}/></td>
             </tr>

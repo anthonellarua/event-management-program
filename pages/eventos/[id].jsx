@@ -11,6 +11,9 @@ import EditInvitadoForm from '@/components/invitados/EditInvitadoForm';
 import EditOrganizerForm from '@/components/organizadores/EditOrganizerForm';
 import EditAnfitrionForm from '@/components/anfitriones/EditAnfitrionForm';
 import EditLugarForm from '@/components/lugares/EditLugarForm';
+import moment from "moment";
+require("moment/min/locales.min");
+moment.locale('es');
 
 export default function EventDetails() {
   const router = useRouter();
@@ -209,7 +212,7 @@ export default function EventDetails() {
 
       setEventDetails(prevDetails => ({
         ...prevDetails,
-        program: [...prevDetails.program, updatedData.activity]
+        program: [...prevDetails.program, {...updatedData.activity, dateModified: moment(updatedData.activity.date).format("D [de] MMMM")}]
       }));
       setIsAddActivityModalOpen(false);
     } catch (error) {
@@ -237,7 +240,7 @@ export default function EventDetails() {
       setEventDetails(prevDetails => ({
         ...prevDetails,
         program: prevDetails.program.map(activity => 
-          activity.id === updatedActivity.id ? updatedActivity : activity
+          activity.id === updatedActivity.id ? {...updatedActivity, dateModified: moment(updatedActivity.date).format("D [de] MMMM")} : activity
         )
       }));
       setIsEditActivityModalOpen(false);
@@ -629,7 +632,7 @@ export default function EventDetails() {
             {program.map((item, index) => (
               <div key={index} className={styles.programa__item}>
                 <div>
-                  <span className={styles.programa__item__date}>{item.date}</span>
+                  <span className={styles.programa__item__date}>{item.dateModified}</span>
                   <span className={styles.programa__item__date}>{item.start_time} - {item.end_time}</span>
                   <span>{item.description}</span>
                 </div>

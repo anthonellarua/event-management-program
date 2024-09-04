@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Image from 'next/image';
@@ -40,7 +42,7 @@ export default function Invitados() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...newInvitado, evento_id: id, contactado: parseInt(newInvitado.contactado, 10) })
+        body: JSON.stringify({ ...newInvitado, contactado: parseInt(newInvitado.contactado, 10) })
       });
   
       if (!response.ok) {
@@ -50,10 +52,10 @@ export default function Invitados() {
       const updatedData = await response.json();
       console.log('Invitado added successfully:', updatedData);
   
-      setEventDetails(prevDetails => ({
-        ...prevDetails,
-        invited: [...prevDetails.invited, updatedData.invitado]
-      }));
+      console.log(newInvitado);
+      setInvitados(prevInvitados => (
+        [...prevInvitados, updatedData.invitado]
+      ));
       setIsAddInvitadoModalOpen(false);
     } catch (error) {
       console.error('Error adding invitado:', error);
@@ -115,7 +117,7 @@ export default function Invitados() {
     <div className={styles.invitados}>
       <div className={styles.invitados__tittle}>
         <h1>Invitados</h1>
-        <span onClick={handleCreateInvitado}><Image width={20} height={20} src="/icons/add-icon.png"/>Nuevo invitado</span>
+        <span onClick={handleCreateInvitado}><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo invitado</span>
       </div>
       {invitados.length > 0 ? (
         <table>
@@ -131,7 +133,7 @@ export default function Invitados() {
               <tr key={invitado.id}>
                 <td>{invitado.name} {invitado.last_name}</td>
                 <td>{invitado.phone}</td>
-                <td>{invitado.evento_id}</td>
+                <td>{invitado.name_event}</td>
                 <td>{invitado.contactado ? 'Sí' : 'No'}</td>
                 <td><Image width={24} height={24} src="/icons/edit-icon-black.png" alt="" onClick={() => handleEditInvitado(invitado)}/>
                 <Image width={24} height={24} src="/icons/delete-icon-black.png" alt="" onClick={() => handleDeleteInvitado(invitado)}/></td>
@@ -145,9 +147,10 @@ export default function Invitados() {
 
       {isAddInvitadoModalOpen && (
         <AddInvitadoForm
-          eventId={id}
-          onClose={setIsAddInvitadoModalOpen(false)}
+          isOpen={isAddInvitadoModalOpen}
+          onClose={() => setIsAddInvitadoModalOpen(false)}
           onSave={handleSaveInvitado}
+          //   eventId={id}
         />
       )}
 
