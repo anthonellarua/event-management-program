@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import styles from './EditEventForm.module.scss';
+import moment from "moment";
+require("moment/min/locales.min");
+moment.locale("es");
 
 export default function EditEventForm({ event, onClose, onSave }) {
+    console.log(event);
   const [formData, setFormData] = useState({
     name_event: event.name_event,
     description: event.description,
     dress_code: event.dress_code,
     occasion: event.occasion,
-    start_date: event.start_date,
-    end_date: event.end_date,
+    start_date: moment(event.start_date).format("YYYY-MM-DD"),
+    end_date: moment(event.end_date).format("YYYY-MM-DD"),
     start_time: event.start_time,
     end_time: event.end_time 
   });

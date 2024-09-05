@@ -3,11 +3,13 @@ import { useRouter } from 'next/router';
 import styles from './index.module.scss';
 import Image from 'next/image';
 import EditOrganizerForm from '@/components/organizadores/EditOrganizerForm';
+import AddOrganizerForm from '@/components/organizadores/AddOrganizerForm';
 import ConfirmDeleteModal from '@/components/confirm/ConfirmDeleteModal';
 
 const OrganizadoresPage = () => {
   const router = useRouter();
   const [organizadores, setOrganizadores] = useState([]);
+  const [isAddOrganizerModalOpen, setIsAddOrganizerModalOpen] = useState(false);
   const [isEditOrganizerModalOpen, setIsEditOrganizerModalOpen] = useState(false);
   const [selectedOrganizer, setSelectedOrganizer] = useState(null);
   const [isDeleteOrganizerModalOpen, setIsDeleteOrganizerModalOpen] = useState(false);
@@ -15,6 +17,10 @@ const OrganizadoresPage = () => {
   useEffect(() => {
     fetchData(); // Función para obtener datos
   }, []);
+
+  const handleCreateOrganizer = () => {
+    setIsAddOrganizerModalOpen(true);
+  };
 
   const handleEditOrganizerClick = (organizer) => {
     setSelectedOrganizer(organizer);
@@ -44,7 +50,36 @@ const OrganizadoresPage = () => {
     }
   };
 
+  const handleSaveOrganizer = async (updatedOrganizer) => {
+    try {
+      const response = await fetch(`/api/organizadores/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...updatedOrganizer })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error adding organizador');
+      }
+  
+      const updatedData = await response.json();
+      console.log('organizador added successfully:', updatedData);
+  
+      const {name_event} = updatedOrganizer
+
+      setOrganizadores(prevOrganizer => (
+        [...prevOrganizer, {...updatedData.organizer, name_event}]
+      ));
+      setIsAddOrganizerModalOpen(false);
+    } catch (error) {
+      console.error('Error adding organizador:', error);
+    }
+  };
+
   const handleSaveEditOrganizer = async (updatedOrganizer) => {
+    console.log(updatedOrganizer);
     try {
       const response = await fetch(`/api/organizadores/update`, {
         method: 'PUT',
@@ -104,7 +139,7 @@ const OrganizadoresPage = () => {
     <div className={styles.organizadores}>
       <div className={styles.organizadores__tittle}>
         <h1>Organizadores</h1>
-        <span><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo organizador</span>
+        <span onClick={handleCreateOrganizer}><Image width={20} height={20} src="/icons/add-icon.png" alt=""/>Nuevo organizador</span>
       </div>
       {organizadores.length > 0 ? (
         <table>
@@ -128,6 +163,14 @@ const OrganizadoresPage = () => {
         </table>
       ) : (
         <p>No hay programas en este momento.</p>
+      )}
+
+      {isAddOrganizerModalOpen && (
+        <AddOrganizerForm
+          organizer={selectedOrganizer}
+          onClose={() => setIsAddOrganizerModalOpen(false)}
+          onSave={handleSaveOrganizer}
+        />
       )}
 
       {isEditOrganizerModalOpen && (

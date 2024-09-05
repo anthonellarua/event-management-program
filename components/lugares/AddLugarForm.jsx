@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
-import styles from "./AddActivityForm.module.scss";
+import styles from "./EditLugarForm.module.scss";
 
-export default function AddActivityForm({ onClose, onSave }) {
-    const [formData, setFormData] = useState({
-        date: "",
-        start_time: "",
-        end_time: "",
-        description: "",
-    });
+const AddLugarForm = ({ lugar, onClose, onSave }) => {
+    const [formData, setFormData] = useState({ ...lugar });
     const [event, setEvent] = useState("");
     const [eventos, setEventos] = useState([]);
 
@@ -21,10 +16,7 @@ export default function AddActivityForm({ onClose, onSave }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e) => {
@@ -40,7 +32,7 @@ export default function AddActivityForm({ onClose, onSave }) {
         <div className={styles.modal}>
             <div className={styles.modalContent}>
                 <div className={styles.modaltittle}>
-                    <h1>Agregar actividad</h1>
+                    <h1>Añadir lugar</h1>
                     <span
                         className={styles.modaltittle__close}
                         onClick={onClose}
@@ -56,7 +48,7 @@ export default function AddActivityForm({ onClose, onSave }) {
                                 value={event}
                                 onChange={(e) => setEvent(e.target.value)}
                             >
-                                <option value="" disabled>
+                                <option value="" selected disabled>
                                     Seleccionar una opción
                                 </option>
                                 {eventos.map((evento, index) => (
@@ -68,40 +60,26 @@ export default function AddActivityForm({ onClose, onSave }) {
                         </label>
                     </div>
                     <label className={styles.form__input}>
-                        <span>Fecha</span>
+                        <span>Nombre</span>
                         <input
-                            type="date"
-                            name="date"
-                            value={formData.date}
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
                         />
                     </label>
-                    <div className={styles.form__doubleinput}>
-                        <label className={styles.form__input}>
-                            <span>Hora de inicio</span>
-                            <input
-                                type="time"
-                                name="start_time"
-                                value={formData.start_time}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label className={styles.form__input}>
-                            <span>Hora de finalización</span>
-                            <input
-                                type="time"
-                                name="end_time"
-                                value={formData.end_time}
-                                onChange={handleChange}
-                            />
-                        </label>
-                    </div>
-
                     <label className={styles.form__input}>
-                        <span>Descripción</span>
-                        <textarea
-                            name="description"
-                            value={formData.description}
+                        <span>Dirección</span>
+                        <input
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label className={styles.form__input}>
+                        <span>Referencia</span>
+                        <input
+                            name="reference"
+                            value={formData.reference}
                             onChange={handleChange}
                         />
                     </label>
@@ -123,4 +101,6 @@ export default function AddActivityForm({ onClose, onSave }) {
             </div>
         </div>
     );
-}
+};
+
+export default AddLugarForm;
