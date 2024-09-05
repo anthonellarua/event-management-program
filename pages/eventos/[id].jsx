@@ -539,7 +539,7 @@ export default function EventDetails() {
   };
 
   if (!eventDetails) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
 
   const { event, invited = [], program = [], organizadores = [], anfitriones = [], lugares = []} = eventDetails;
@@ -585,7 +585,7 @@ export default function EventDetails() {
           
         </div>
         <div>
-          <Image width={24} height={24} src="/icons/user-icon-black.png" alt="" />
+          <Image width={24} height={24} src="/icons/pin-icon-black.png" alt="" />
           <div>
             <span>Lugar</span><span>añadir</span>
             {lugares.length > 0 ? (
@@ -666,9 +666,9 @@ export default function EventDetails() {
                 </div>
                 <div>
                   {invite.contactado === 0 ? (
-                    <span className={styles.invitados__buttoncontactar}>Contactar</span>
+                    <span className={styles.invitados__buttoncontactar}><div className={styles.circle}></div>Falta contactar</span>
                   ) : (
-                    <span className={styles.invitados__buttoncontactado}>Contactado</span>
+                    <span className={styles.invitados__buttoncontactado}><div className={styles.circle}></div>Contactado</span>
                   )}
                 </div>
                 <div className={styles.invitados__actions}>

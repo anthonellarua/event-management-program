@@ -24,6 +24,7 @@
 
     &__item{
         display: flex;
+        width: 50%;
         padding: 40px;
         flex-direction: column;
         gap: 16px;
@@ -78,6 +79,18 @@
         background-color: var(--white);
         box-shadow: var(--boxshadow-100);
         border-radius: 12px;
+
+        div:nth-child(2), div:nth-child(3){
+            width: 15%;
+            display: flex;
+            justify-content: center;
+        }
+
+        div:nth-child(4){
+            width: 30%;
+            display: flex;
+            justify-content: center;
+        }
     }
 
     &__button{

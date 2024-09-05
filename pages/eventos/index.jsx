@@ -41,9 +41,9 @@ export default function EventsList() {
           <span>{event.description}</span>
           <div className={styles.evento_item__details}>
             <div>
-              <span><Image width={24} height={24} src="/icons/user-icon-gray.png" alt=""/>{event.start_date}</span>
+              <span><Image width={24} height={24} src="/icons/user-icon-gray.png" alt=""/>{event.host_name}</span>
               <span><Image width={24} height={24} src="/icons/pin-icon-gray.png" alt=""/> {event.location}</span>
-              <span><Image width={24} height={24} src="/icons/calendar-icon-gray.png" alt=""/>{event.host_name}</span>
+              <span><Image width={24} height={24} src="/icons/calendar-icon-gray.png" alt=""/>{event.start_date}</span>
             </div>
             <Link className={styles.evento_item__button} href={`/eventos/${event.id}`}>
               Ver Evento
