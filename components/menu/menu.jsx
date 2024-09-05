@@ -55,8 +55,7 @@ export default function Menu() {
               </Link>
           </div>
         </div>
-        <div className={styles.menusection__hr}>
-        </div>
+        
       </div>
     </div>
   );

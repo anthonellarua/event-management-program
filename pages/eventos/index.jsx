@@ -97,24 +97,20 @@ export default function EventsList() {
         <div className={styles.eventos}>
             <div className={styles.eventos__tittle}>
                 <h1>Eventos</h1>
-                <span onClick={handleCreateEvent}>
-                    <Image
-                        width={20}
-                        height={20}
-                        src="/icons/add-icon.png"
-                        alt=""
-                    />
-                    Nuevo evento
-                </span>
-                <span onClick={handleDownloadReport}>
-                    <Image
-                        width={20}
-                        height={20}
-                        src="/icons/add-icon.png"
-                        alt=""
-                    />
-                    Exportar evento
-                </span>
+                <div className={styles.eventos__tittle__buttons}>
+                    <span onClick={handleCreateEvent}>
+                        <Image
+                            width={20}
+                            height={20}
+                            src="/icons/add-icon.png"
+                            alt=""
+                        />
+                        Nuevo evento
+                    </span>
+                    <span onClick={handleDownloadReport}>
+                        Descargar reporte
+                    </span>
+                </div>
             </div>
             {events.map((event, index) => (
                 <div key={index} className={styles.evento_item}>
@@ -129,7 +125,7 @@ export default function EventsList() {
                                     src="/icons/user-icon-gray.png"
                                     alt=""
                                 />
-                                {event.start_date}
+                                {event.host_name}
                             </span>
                             <span>
                                 <Image
@@ -147,35 +143,37 @@ export default function EventsList() {
                                     src="/icons/calendar-icon-gray.png"
                                     alt=""
                                 />
-                                {event.host_name}
+                                {event.start_date}
                             </span>
                         </div>
-                        <Link
-                            className={styles.evento_item__button}
-                            href={`/eventos/${event.id}`}
-                        >
-                            Ver Evento
-                            <Image
-                                width={24}
-                                height={24}
-                                src="/icons/chevron-right-light.png"
-                                alt=""
-                            />
-                        </Link>
-                        <div
-                            className={styles.evento_item__button}
-                            onClick={() => {
-                                setId(event.id);
-                                setIsDeleteEventModalOpen(true);
-                            }}
-                        >
-                            Eliminar Evento
-                            <Image
-                                width={24}
-                                height={24}
-                                src="/icons/delete-icon-black.png"
-                                alt=""
-                            />
+                        
+                        <div>
+                            <div
+                                className={styles.evento_item__buttondelete}
+                                onClick={() => {
+                                    setId(event.id);
+                                    setIsDeleteEventModalOpen(true);
+                                }}
+                            >
+                                <Image
+                                    width={24}
+                                    height={24}
+                                    src="/icons/delete-icon-black.png"
+                                    alt=""
+                                />
+                            </div>
+                            <Link
+                                className={styles.evento_item__button}
+                                href={`/eventos/${event.id}`}
+                            >
+                                Ver Evento
+                                <Image
+                                    width={24}
+                                    height={24}
+                                    src="/icons/chevron-right-light.png"
+                                    alt=""
+                                />
+                            </Link>
                         </div>
                     </div>
                 </div>

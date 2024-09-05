@@ -12,8 +12,23 @@
 
 .people{
     display: flex;
-    align-items: center;
     gap: 20px;
+
+    &__title{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .addbutton{
+            font-size: 20px;
+            background-color: var(--white);
+            padding: 3px 10px;
+            color: var(--gray-200);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    }
 
     >div{
         display: flex;
@@ -22,20 +37,32 @@
         gap: 20px;
         background-color: var(--gray-100);
         border-radius: 12px;
-        width: 33%;
+        width: 100%;
         
         >div{
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            gap: 5px;
+            gap: 10px;
+            width: 100%;
 
             span:nth-child(1){
-                font-size: 14px;
                 font-weight: 700;
             }
         }
+    }
+}
+
+.peopleitems{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div{
+        display: flex;
+        gap: 10px;
     }
 }
 

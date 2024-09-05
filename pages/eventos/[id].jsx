@@ -707,34 +707,38 @@ export default function EventDetails() {
                         alt=""
                     />
                     <div>
-                        <span>Organizador</span>
-                        <span onClick={() => handleAddOrganizerClick()}>
-                            añadir
-                        </span>
+                        <div className={styles.people__title}>
+                            <span>Organizador(es)</span>
+                            <span onClick={() => handleAddOrganizerClick()} className={styles.addbutton}>
+                                +
+                            </span>
+                        </div>
                         {organizadores.length > 0 ? (
                             organizadores.map((organizer, index) => (
-                                <span key={index}>
+                                <span key={index} className={styles.peopleitems}>
                                     {organizer.name}
-                                    <Image
-                                        width={24}
-                                        height={24}
-                                        src="/icons/edit-icon-black.png"
-                                        alt=""
-                                        onClick={() =>
-                                            handleEditOrganizerClick(organizer)
-                                        }
-                                    />
-                                    <Image
-                                        width={24}
-                                        height={24}
-                                        src="/icons/delete-icon-black.png"
-                                        alt=""
-                                        onClick={() =>
-                                            handleDeleteOrganizerClick(
-                                                organizer
-                                            )
-                                        }
-                                    />
+                                    <div>
+                                        <Image
+                                            width={24}
+                                            height={24}
+                                            src="/icons/edit-icon-black.png"
+                                            alt=""
+                                            onClick={() =>
+                                                handleEditOrganizerClick(organizer)
+                                            }
+                                        />
+                                        <Image
+                                            width={24}
+                                            height={24}
+                                            src="/icons/delete-icon-black.png"
+                                            alt=""
+                                            onClick={() =>
+                                                handleDeleteOrganizerClick(
+                                                    organizer
+                                                )
+                                            }
+                                        />
+                                    </div>
                                 </span>
                             ))
                         ) : (
@@ -750,34 +754,39 @@ export default function EventDetails() {
                         alt=""
                     />
                     <div>
-                        <span>Anfitrión</span>
-                        <span onClick={() => setIsAddAnfitrionModalOpen(true)}>
-                            añadir
-                        </span>
+                        <div className={styles.people__title}>
+                            <span>Anfitrión(es)</span>
+                            <span onClick={() => setIsAddAnfitrionModalOpen(true)} className={styles.addbutton}>
+                                +
+                            </span>
+                        </div>
+                        
                         {anfitriones.length > 0 ? (
                             anfitriones.map((anfitrion, index) => (
-                                <span key={index}>
+                                <span key={index} className={styles.peopleitems}>
                                     {anfitrion.name}
-                                    <Image
-                                        width={24}
-                                        height={24}
-                                        src="/icons/edit-icon-black.png"
-                                        alt=""
-                                        onClick={() =>
-                                            handleEditAnfitrionClick(anfitrion)
-                                        }
-                                    />
-                                    <Image
-                                        width={24}
-                                        height={24}
-                                        src="/icons/delete-icon-black.png"
-                                        alt=""
-                                        onClick={() =>
-                                            handleDeleteAnfitrionClick(
-                                                anfitrion
-                                            )
-                                        }
-                                    />
+                                    <div>
+                                        <Image
+                                            width={24}
+                                            height={24}
+                                            src="/icons/edit-icon-black.png"
+                                            alt=""
+                                            onClick={() =>
+                                                handleEditAnfitrionClick(anfitrion)
+                                            }
+                                        />
+                                        <Image
+                                            width={24}
+                                            height={24}
+                                            src="/icons/delete-icon-black.png"
+                                            alt=""
+                                            onClick={() =>
+                                                handleDeleteAnfitrionClick(
+                                                    anfitrion
+                                                )
+                                            }
+                                        />
+                                    </div>
                                 </span>
                             ))
                         ) : (
@@ -793,14 +802,18 @@ export default function EventDetails() {
                         alt=""
                     />
                     <div>
-                        <span>Lugar</span>
-                        <span onClick={() => setIsAddLugarModalOpen(true)}>
-                            añadir
-                        </span>
+                        <div className={styles.people__title}>
+                            <span>Lugar(es)</span>
+                            <span onClick={() => setIsAddLugarModalOpen(true)} className={styles.addbutton}>
+                                +
+                            </span>
+                        </div>
+                        
                         {lugares.length > 0 ? (
                             lugares.map((lugar, index) => (
-                                <span key={index}>
+                                <span key={index} className={styles.peopleitems}>
                                     {lugar.name}
+                                    <div>
                                     <Image
                                         width={24}
                                         height={24}
@@ -819,6 +832,7 @@ export default function EventDetails() {
                                             handleDeleteLugarClick(lugar)
                                         }
                                     />
+                                    </div>
                                 </span>
                             ))
                         ) : (
@@ -968,7 +982,10 @@ export default function EventDetails() {
                                                 styles.invitados__buttoncontactar
                                             }
                                         >
-                                            Contactar
+                                            <div className={
+                                                styles.circle
+                                            }></div>
+                                            Falta contactar
                                         </span>
                                     ) : (
                                         <span
@@ -976,6 +993,9 @@ export default function EventDetails() {
                                                 styles.invitados__buttoncontactado
                                             }
                                         >
+                                            <div className={
+                                                styles.circle
+                                            }></div>
                                             Contactado
                                         </span>
                                     )}
